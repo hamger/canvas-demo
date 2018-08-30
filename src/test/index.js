@@ -11,15 +11,6 @@ var element = new Circle({
 })
 canvas.addElement(element)
 
-var element4 = new Circle({
-  zIndex: -2,
-  r: 50,
-  y: 150,
-  x: 150,
-  fill: '#222'
-})
-canvas.addElement(element4)
-
 var element2 = new Rect({
   x: 200,
   y: 400,
@@ -40,10 +31,19 @@ var element3 = new Rect({
 
 canvas.addElement(element3)
 
+var element4 = new Circle({
+  zIndex: -2,
+  r: 50,
+  y: 150,
+  x: 150,
+  fill: '#3e9'
+})
+canvas.addElement(element4)
+
 canvas.draw()
 
-setTimeout(() => {
-  canvas.removeElement(element2)
-  element3.attr({stroke: '#4F8'})
-  canvas.draw()
-}, 1600)
+// setTimeout(() => {
+//   canvas.removeElement(element2)
+//   element3.attr({stroke: '#4F8'})
+//   canvas.draw()
+// }, 1600)

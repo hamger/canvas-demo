@@ -10,8 +10,8 @@ export function getVal (obj, key) {
 export function arrSort (arr, key, isDescend) {
   // 对每项是对象的数组排序
   arr.sort(function (a, b) {
-    if (isDescend) return b[key] - a[key]
-    else return a[key] - b[key]
+    if (isDescend) return getVal(b, key) - getVal(a, key)
+    else return getVal(a, key) - getVal(b, key)
   })
   return arr
 }

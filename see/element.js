@@ -1,15 +1,9 @@
 let id = 0
 export default class Element {
-  constructor (
-    opt = {
-      zIndex: 0,
-      from: {},
-      duration: 1000,
-      easing: 'Quadratic.Out'
-    }
-  ) {
+  constructor (opt) {
     this.id = id++
     this.opt = opt
+    this.opt.zIndex = opt.zIndex || 0
   }
   // 设置绘制属性
   attr (opt) {
@@ -25,6 +19,8 @@ export default class Element {
     if (opt.shadowOffsetX) ctx.shadowOffsetX = opt.shadowOffsetX
     if (opt.shadowOffsetY) ctx.shadowOffsetY = opt.shadowOffsetY
     if (opt.opacity) ctx.globalAlpha = opt.opacity
-    if (opt.globalCompositeOperation) { ctx.globalCompositeOperation = opt.globalCompositeOperation }
+    if (opt.globalCompositeOperation) {
+      ctx.globalCompositeOperation = opt.globalCompositeOperation
+    }
   }
 }

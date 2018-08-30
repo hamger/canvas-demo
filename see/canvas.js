@@ -1,5 +1,7 @@
 import Element from './element'
 import { arrSort } from './utils'
+import { getLocation } from '../src/util'
+
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -16,10 +18,19 @@ class Canvas {
     this.resize()
     window.onresize = this.resize.bind(this)
     this.ctx = canvas.getContext('2d')
-    // var ctx = this.ctx
+    var ctx = this.ctx
     // ctx.rect(10, 10, 100, 100)
+    // ctx.rect(120, 120, 170, 170)
     // ctx.fill()
-    // console.log(ctx.isPointInPath(112, 112))
+    // console.log(ctx.isPointInPath(12, 12))
+    canvas.addEventListener('click', e => {
+      var location = getLocation(canvas, e)
+      ctx.save()
+      ctx.rect(10, 10, 100, 100)
+      console.log(ctx.isPointInPath(location.x, location.y))
+      ctx.restore()
+      // this.draw()
+    })
   }
   resize () {
     this.width = this.canvas.width = this.container.clientWidth
@@ -46,7 +57,7 @@ class Canvas {
   }
   draw () {
     this.clear()
-    arrSort(this.children, 'zIndex').forEach(child => {
+    arrSort(this.children, 'opt.zIndex').forEach(child => {
       child.draw(this.ctx)
     })
   }

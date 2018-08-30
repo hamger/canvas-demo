@@ -1,4 +1,4 @@
-import { Canvas, Element, Circle, Rect } from '../../see'
+import { Canvas, Circle, Rect } from '../../see'
 var canvas = new Canvas({
   container: document.getElementById('container')
 })
@@ -10,7 +10,6 @@ var element = new Circle({
   fill: '#999'
 })
 canvas.addElement(element)
-console.log(element instanceof Element)
 
 var element4 = new Circle({
   zIndex: -2,

@@ -3,7 +3,6 @@ import Element from '../element'
 export default class Circle extends Element {
   constructor (opt) {
     super(opt)
-    if (this.opt.to) this.move()
   }
   draw (ctx) {
     let opt = this.opt

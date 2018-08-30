@@ -1,6 +1,5 @@
 import Element from './element'
-import TWEEN from '@tweenjs/tween.js'
-import {arrSort} from './utils'
+import { arrSort } from './utils'
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -17,6 +16,10 @@ class Canvas {
     this.resize()
     window.onresize = this.resize.bind(this)
     this.ctx = canvas.getContext('2d')
+    // var ctx = this.ctx
+    // ctx.rect(10, 10, 100, 100)
+    // ctx.fill()
+    // console.log(ctx.isPointInPath(112, 112))
   }
   resize () {
     this.width = this.canvas.width = this.container.clientWidth
@@ -42,29 +45,13 @@ class Canvas {
     }
   }
   draw () {
-    if (
-      this.children.some(function (item) {
-        return item.isMotion === true
-      })
-    ) {
-      requestAnimationFrame(this.animate.bind(this))
-    } else {
-      this.clear()
-      arrSort(this.children, 'zIndex').forEach(child => {
-        child.draw(this.ctx)
-      })
-    }
-  }
-  clear () {
-    this.ctx.clearRect(0, 0, this.width, this.height)
-  }
-  animate (time) {
-    requestAnimationFrame(this.animate.bind(this))
     this.clear()
     arrSort(this.children, 'zIndex').forEach(child => {
       child.draw(this.ctx)
     })
-    TWEEN.update(time)
+  }
+  clear () {
+    this.ctx.clearRect(0, 0, this.width, this.height)
   }
   animate2 (func) {
     requestAnimationFrame(func)

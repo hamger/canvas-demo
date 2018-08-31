@@ -1,7 +1,6 @@
 import Element from './element'
-import { arrSort } from './utils'
+import { arrSort, tap } from './utils'
 import { getLocation } from '../src/util'
-
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -40,6 +39,9 @@ class Canvas {
       })
       this.draw()
       if (temp) temp.click(e)
+    })
+    this.canvas.addEventListener(tap.start, e => {
+      console.log(e)
     })
   }
   addElement (element) {

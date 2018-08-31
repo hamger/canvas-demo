@@ -1,3 +1,8 @@
+/**
+ * 根据 key 获取对象中的值
+ * @param {取值对象} obj
+ * @param {描述键的字符串，支持链式键，如 a.b.c} key
+ */
 export function getVal (obj, key) {
   return key.split('.').reduce((obj, name) => obj[name], obj)
 }
@@ -14,4 +19,22 @@ export function arrSort (arr, key, isDescend) {
     else return getVal(a, key) - getVal(b, key)
   })
   return arr
+}
+// 判断是否是移动端
+export function isMobile () {
+  if (
+    navigator.userAgent.match(
+      /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    )
+  ) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export const tap = {
+  start: isMobile() ? 'touchstart' : 'mousedown',
+  move: isMobile() ? 'touchmove' : 'mousemove',
+  end: isMobile() ? 'touchend' : 'mouseup'
 }

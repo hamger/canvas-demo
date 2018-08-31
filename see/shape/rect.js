@@ -4,16 +4,15 @@ export default class Rect extends Element {
   constructor (opt) {
     super(opt)
   }
-  draw (ctx) {
-    let opt = this.opt
+  draw () {
+    var ctx = this.ctx
     ctx.save()
-    if (opt.stroke) {
-      ctx.strokeStyle = opt.stroke
-      ctx.strokeRect(opt.x, opt.y, opt.w, opt.h)
-    } else {
-      ctx.fillStyle = opt.fill || '#000'
-      ctx.fillRect(opt.x, opt.y, opt.w, opt.h)
-    }
+    ctx.beginPath()
+    if (this.stroke) ctx.strokeStyle = this.stroke
+    else ctx.fillStyle = this.fill
+    ctx.rect(this.x, this.y, this.w, this.h)
+    if (this.stroke) ctx.stroke()
+    else ctx.fill()
     ctx.restore()
   }
 }

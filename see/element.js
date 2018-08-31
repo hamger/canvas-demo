@@ -2,25 +2,24 @@ let id = 0
 export default class Element {
   constructor (opt) {
     this.id = id++
-    this.opt = opt
-    this.opt.zIndex = opt.zIndex || 0
+    if (opt.zIndex === undefined) opt.zIndex = 0
+    Object.assign(this, opt)
   }
   // 设置绘制属性
   attr (opt) {
-    this.opt = Object.assign(this.opt, opt)
+    Object.assign(this, opt)
   }
   // 设置公共绘制样式
   generalAttr (ctx) {
-    let opt = this.opt
-    if (opt.stroke) ctx.strokeStyle = opt.stroke
-    if (opt.fill) ctx.fillStyle = opt.fill
-    if (opt.shadowColor) ctx.shadowColor = opt.shadowColor
-    if (opt.shadowBlur) ctx.shadowBlur = opt.shadowBlur
-    if (opt.shadowOffsetX) ctx.shadowOffsetX = opt.shadowOffsetX
-    if (opt.shadowOffsetY) ctx.shadowOffsetY = opt.shadowOffsetY
-    if (opt.opacity) ctx.globalAlpha = opt.opacity
-    if (opt.globalCompositeOperation) {
-      ctx.globalCompositeOperation = opt.globalCompositeOperation
+    if (this.stroke) ctx.strokeStyle = this.stroke
+    if (this.fill) ctx.fillStyle = this.fill
+    if (this.shadowColor) ctx.shadowColor = this.shadowColor
+    if (this.shadowBlur) ctx.shadowBlur = this.shadowBlur
+    if (this.shadowOffsetX) ctx.shadowOffsetX = this.shadowOffsetX
+    if (this.shadowOffsetY) ctx.shadowOffsetY = this.shadowOffsetY
+    if (this.opacity) ctx.globalAlpha = this.opacity
+    if (this.globalCompositeOperation) {
+      ctx.globalCompositeOperation = this.globalCompositeOperation
     }
   }
 }

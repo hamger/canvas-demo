@@ -6,7 +6,9 @@ class Canvas {
   constructor (opt) {
     this.container = opt.container
     this.children = []
+    this.clickChildren = []
     this.init()
+    this.bind()
   }
   init () {
     var canvas = document.createElement('canvas')
@@ -18,27 +20,33 @@ class Canvas {
     this.resize()
     window.onresize = this.resize.bind(this)
     this.ctx = canvas.getContext('2d')
-    var ctx = this.ctx
-    // ctx.rect(10, 10, 100, 100)
-    // ctx.rect(120, 120, 170, 170)
-    // ctx.fill()
-    // console.log(ctx.isPointInPath(12, 12))
-    canvas.addEventListener('click', e => {
-      var location = getLocation(canvas, e)
-      ctx.save()
-      ctx.rect(10, 10, 100, 100)
-      console.log(ctx.isPointInPath(location.x, location.y))
-      ctx.restore()
-      // this.draw()
-    })
   }
   resize () {
     this.width = this.canvas.width = this.container.clientWidth
     this.height = this.canvas.height = this.container.clientHeight
   }
+  bind () {
+    this.canvas.addEventListener('click', e => {
+      let temp = null
+      var location = getLocation(this.canvas, e)
+      // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
+      arrSort(this.clickChildren, 'zIndex', true).some(child => {
+        this.clear()
+        child.draw(this.ctx)
+        if (this.ctx.isPointInPath(location.x, location.y)) {
+          temp = child
+          return true
+        }
+      })
+      this.draw()
+      if (temp) temp.click(e)
+    })
+  }
   addElement (element) {
     if (element instanceof Element) {
+      element.ctx = this.ctx
       this.children.push(element)
+      if (element.click) this.clickChildren.push(element)
     } else {
       throw Error('Function addElement only accept the instance of Element.')
     }
@@ -53,12 +61,13 @@ class Canvas {
       })
     } else {
       this.children = []
+      this.clickChildren = []
     }
   }
   draw () {
     this.clear()
-    arrSort(this.children, 'opt.zIndex').forEach(child => {
-      child.draw(this.ctx)
+    arrSort(this.children, 'zIndex').forEach(child => {
+      child.draw()
     })
   }
   clear () {

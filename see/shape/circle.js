@@ -4,14 +4,14 @@ export default class Circle extends Element {
   constructor (opt) {
     super(opt)
   }
-  draw (ctx) {
-    let opt = this.opt
+  draw () {
+    var ctx = this.ctx
     ctx.save()
     ctx.beginPath()
-    if (opt.stroke) ctx.strokeStyle = opt.stroke
-    else ctx.fillStyle = opt.fill || '#000'
-    ctx.arc(opt.x, opt.y, opt.r, 0, Math.PI * 2)
-    if (opt.stroke) ctx.stroke()
+    if (this.stroke) ctx.strokeStyle = this.stroke
+    else ctx.fillStyle = this.fill
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
+    if (this.stroke) ctx.stroke()
     else ctx.fill()
     ctx.restore()
   }

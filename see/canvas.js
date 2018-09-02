@@ -41,12 +41,12 @@ class Canvas {
       if (temp) temp.click(e)
     })
     this.canvas.addEventListener(tap.start, e => {
-      console.log(e)
     })
   }
   addElement (element) {
     if (element instanceof Element) {
       element.ctx = this.ctx
+      element.canvas = this.canvas
       this.children.push(element)
       if (element.click) this.clickChildren.push(element)
     } else {
@@ -61,6 +61,14 @@ class Canvas {
           return true
         }
       })
+      if (element.click) {
+        this.clickChildren.some((item, index) => {
+          if (item.id === element.id) {
+            this.children.splice(index, 1)
+            return true
+          }
+        })
+      }
     } else {
       this.children = []
       this.clickChildren = []
@@ -75,7 +83,7 @@ class Canvas {
   clear () {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
-  animate2 (func) {
+  animate (func) {
     requestAnimationFrame(func)
   }
 }

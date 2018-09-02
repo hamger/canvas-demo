@@ -53,4 +53,4 @@ function move () {
   canvas.draw()
 }
 
-canvas.animate2(move)
+canvas.animate(move)

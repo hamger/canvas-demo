@@ -9,6 +9,12 @@ export default class Element {
   attr (opt) {
     Object.assign(this, opt)
   }
+  addEventListener (eventType, callback) {
+    this[eventType] = callback
+  }
+  removeEventListener (eventType) {
+    this[eventType] = null
+  }
   // 设置公共绘制样式
   generalAttr (ctx) {
     if (this.stroke) ctx.strokeStyle = this.stroke

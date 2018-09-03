@@ -38,3 +38,9 @@ export const tap = {
   move: isMobile() ? 'touchmove' : 'mousemove',
   end: isMobile() ? 'touchend' : 'mouseup'
 }
+
+// 去除字符串多余空格，并将内部的多个空格转化为一个空格
+export function delBlank (str) {
+  var regEx = /\s+/g
+  return str.trim().replace(regEx, ' ')
+}

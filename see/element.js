@@ -17,7 +17,7 @@ export default class Element {
     this[eventType] = null
   }
   // 设置公共绘制样式
-  generalAttr (ctx) {
+  setGeneral (ctx) {
     if (this.stroke) ctx.strokeStyle = this.stroke
     if (this.fill) ctx.fillStyle = this.fill
     if (this.shadowColor) ctx.shadowColor = this.shadowColor
@@ -28,5 +28,11 @@ export default class Element {
     if (this.globalCompositeOperation) {
       ctx.globalCompositeOperation = this.globalCompositeOperation
     }
+  }
+  setLine (ctx) {
+    if (this.lineWidth) ctx.lineWidth = this.lineWidth
+    if (this.lineCap) ctx.lineCap = this.lineCap
+    if (this.lineJoin) ctx.lineJoin = this.lineJoin
+    if (this.lineLimit) ctx.lineLimit = this.lineLimit
   }
 }

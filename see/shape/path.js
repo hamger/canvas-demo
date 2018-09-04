@@ -30,6 +30,7 @@ export default class Path extends Element {
       let arr = []
       if (pathVal[index]) {
         arr = pathVal[index].split(' ').map(item => {
+          // 需要将字符串转化为数字
           return Number(item)
         })
       }
@@ -63,6 +64,21 @@ export default class Path extends Element {
       if (type === 'v') this.lastPoint[1] += val[0]
       else this.lastPoint[1] = val[0]
       this.ctx.lineTo(this.lastPoint[0], this.lastPoint[1])
+    }
+    if (/(A|a)/.test(type)) {
+      let params = val
+      if (type === 'a') {
+        params[0] = this.lastPoint[0] + val[0]
+        params[1] = this.lastPoint[1] + val[1]
+      }
+      params[3] = (val[3] * Math.PI) / 180
+      params[4] = (val[4] * Math.PI) / 180
+      params[5] = !!val[5]
+      this.ctx.arc(...params)
+      this.lastPoint = [
+        params[0] + params[2] * Math.cos(params[4]),
+        params[1] + params[2] * Math.sin(params[4])
+      ]
     }
     // 三次贝塞尔曲线
     if (/(C|c|S|s)/.test(type)) {

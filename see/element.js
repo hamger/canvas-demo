@@ -3,6 +3,7 @@ export default class Element {
   constructor (opt) {
     this.id = id++
     if (opt.zIndex === undefined) opt.zIndex = 0
+    if (opt.visible === undefined) opt.visible = true
     Object.assign(this, opt)
   }
   // 设置绘制属性

@@ -5,7 +5,7 @@ let canvas = new Canvas({
 })
 
 canvas.addElement(new Path({
-  path: 'M 10 10 L 100 100 l 30 -49',
+  path: 'M 10 10 L 100 100 l 30 -50 C 100 100 200 200 300 200 s 50 50 100 100 T 130 500',
   stroke: '#454'
 }))
 

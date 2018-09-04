@@ -4,7 +4,8 @@ import { delBlank } from '../utils'
 export default class Path extends Element {
   constructor (opt) {
     super(opt)
-    this.curPoint = []
+    this.lastPoint = []
+    this.lastCpoint = []
   }
   draw () {
     var ctx = this.ctx
@@ -39,19 +40,68 @@ export default class Path extends Element {
     ctx.restore()
   }
   resolve (type, val) {
-    if (type === 'M') {
-      this.curPoint = val
-      this.ctx.moveTo(this.curPoint[0], this.curPoint[1])
+    if (/(M|m)/.test(type)) {
+      this.lastPoint = val
+      this.ctx.moveTo(this.lastPoint[0], this.lastPoint[1])
     }
-    if (type === 'L' || type === 'l') {
+    if (/(L|l)/.test(type)) {
       if (type === 'l') {
         val.forEach((item, index) => {
-          this.curPoint[index] += item
+          this.lastPoint[index] += item
         })
-      } else this.curPoint = val
-      this.ctx.lineTo(this.curPoint[0], this.curPoint[1])
+      } else this.lastPoint = val
+      this.ctx.lineTo(this.lastPoint[0], this.lastPoint[1])
     }
-    if (type === 'Z' || type === 'z') {
+    // 水平直线
+    if (/(H|h)/.test(type)) {
+      if (type === 'h') this.lastPoint[0] += val[0]
+      else this.lastPoint[0] = val[0]
+      this.ctx.lineTo(this.lastPoint[0], this.lastPoint[1])
+    }
+    // 垂直直线
+    if (/(V|v)/.test(type)) {
+      if (type === 'v') this.lastPoint[1] += val[0]
+      else this.lastPoint[1] = val[0]
+      this.ctx.lineTo(this.lastPoint[0], this.lastPoint[1])
+    }
+    // 三次贝塞尔曲线
+    if (/(C|c|S|s)/.test(type)) {
+      let params = []
+      if (/(S|s)/.test(type)) {
+        params[0] =
+          this.lastPoint[0] * 2 - (this.lastCpoint[0] || this.lastPoint[0])
+        params[1] =
+          this.lastPoint[1] * 2 - (this.lastCpoint[1] || this.lastPoint[0])
+      }
+      if (/(c|s)/.test(type)) {
+        val.forEach((item, index) => {
+          params.push(this.lastPoint[index % 2] + item)
+        })
+      } else params = params.concat(val)
+      this.ctx.bezierCurveTo(...params)
+      this.lastPoint = [params[4], params[5]]
+      this.lastCpoint = [params[2], params[3]]
+    }
+    // 二次贝塞尔曲线
+    if (/(Q|q|T|t)/.test(type)) {
+      let params = []
+      if (/(T|t)/.test(type)) {
+        params[0] =
+          this.lastPoint[0] * 2 - (this.lastCpoint[0] || this.lastPoint[0])
+        params[1] =
+          this.lastPoint[1] * 2 - (this.lastCpoint[1] || this.lastPoint[0])
+      }
+      if (/(q|t)/.test(type)) {
+        val.forEach((item, index) => {
+          params.push(this.lastPoint[index % 2] + item)
+        })
+      } else params = params.concat(val)
+      this.ctx.quadraticCurveTo(...params)
+      this.lastPoint = [params[2], params[3]]
+      this.lastCpoint = [params[0], params[1]]
+    }
+    // 闭合路径
+    if (/(Z|z)/.test(type)) {
       this.ctx.closePath()
     }
   }

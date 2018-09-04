@@ -1,6 +1,6 @@
 import Element from '../element'
 
-export default class Polyline extends Element {
+export default class Polygon extends Element {
   constructor (opt) {
     super(opt)
   }
@@ -14,7 +14,7 @@ export default class Polyline extends Element {
       if (index === 0) ctx.moveTo(item[0], item[1])
       else ctx.lineTo(item[0], item[1])
     })
-    ctx.stroke()
+    ctx.fill()
     ctx.restore()
   }
 }

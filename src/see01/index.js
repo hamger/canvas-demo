@@ -1,5 +1,5 @@
 // import { Canvas, Circle } from '../../see'
-import { Canvas, Path, Polyline } from '../../see'
+import { Canvas, Path, Polyline, Polygon } from '../../see'
 let canvas = new Canvas({
   container: document.getElementById('container')
 })
@@ -10,7 +10,13 @@ canvas.addElement(new Path({
 }))
 
 canvas.addElement(new Polyline({
-  points: [[90, 190], [34, 56], [222, 333]]
+  points: [[90, 190], [34, 56], [222, 333]],
+  lineWidth: 3
+}))
+
+canvas.addElement(new Polygon({
+  points: [[500, 190], [234, 356], [522, 433]],
+  fill: '#999'
 }))
 
 canvas.draw()

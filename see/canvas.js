@@ -30,6 +30,7 @@ class Canvas {
       var location = getLocation(this.canvas, e)
       // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
       arrSort(this.clickChildren, 'zIndex', true).some(child => {
+        if (!child.visible) return false
         this.clear()
         child.draw(this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
@@ -40,8 +41,7 @@ class Canvas {
       this.draw()
       if (temp) temp.click(e)
     })
-    this.canvas.addEventListener(tap.start, e => {
-    })
+    this.canvas.addEventListener(tap.start, e => {})
   }
   addElement (element) {
     if (element instanceof Element) {
@@ -77,7 +77,7 @@ class Canvas {
   draw () {
     this.clear()
     arrSort(this.children, 'zIndex').forEach(child => {
-      child.draw()
+      if (child.visible) child.draw()
     })
   }
   clear () {

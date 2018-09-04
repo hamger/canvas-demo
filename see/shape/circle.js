@@ -8,8 +8,8 @@ export default class Circle extends Element {
     var ctx = this.ctx
     ctx.save()
     ctx.beginPath()
-    if (this.stroke) ctx.strokeStyle = this.stroke
-    else ctx.fillStyle = this.fill
+    this.setGeneral()
+    this.setLine()
     ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
     if (this.stroke) ctx.stroke()
     else ctx.fill()

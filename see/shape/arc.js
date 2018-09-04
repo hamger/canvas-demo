@@ -1,6 +1,6 @@
 import Element from '../element'
 
-export default class Polygon extends Element {
+export default class Arc extends Element {
   constructor (opt) {
     super(opt)
   }
@@ -10,11 +10,9 @@ export default class Polygon extends Element {
     ctx.beginPath()
     this.setGeneral()
     this.setLine()
-    this.points.forEach((item, index) => {
-      if (index === 0) ctx.moveTo(item[0], item[1])
-      else ctx.lineTo(item[0], item[1])
-    })
-    ctx.fill()
+    ctx.arc(this.x, this.y, this.r, this.startAngle, this.endAngle, this.anticlockwise)
+    if (this.stroke) ctx.stroke()
+    else ctx.fill()
     ctx.restore()
   }
 }

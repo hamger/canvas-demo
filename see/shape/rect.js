@@ -8,8 +8,8 @@ export default class Rect extends Element {
     var ctx = this.ctx
     ctx.save()
     ctx.beginPath()
-    if (this.stroke) ctx.strokeStyle = this.stroke
-    else ctx.fillStyle = this.fill
+    this.setGeneral()
+    this.setLine()
     ctx.rect(this.x, this.y, this.w, this.h)
     if (this.stroke) ctx.stroke()
     else ctx.fill()

@@ -1,9 +1,10 @@
-* 基础
-  * [快速使用](/quickstart.md)
-* API
-  * [Canvas](/canvas.md)
-  * [Element](/element.md)
-  * Shape
-    * [Circle](/shape/circle.md)
-    * [Rect](/shape/rect.md)
-  
+- 基础
+  - [快速使用](/quickstart.md)
+
+- API
+  - [method](/method/index.md)
+
+  - constructor
+    - [Eraser](/constructor/eraser.md)
+    - [Magnifier](/constructor/magnifier.md)
+    - [Net](/constructor/net.md)

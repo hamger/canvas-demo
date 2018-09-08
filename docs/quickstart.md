@@ -1,19 +1,15 @@
-> 使用以下代码创建一个 canvas 画布，并在画布上画一个圆形
+## Install
+```bash
+npm install canvas-kit
+```
 
+## Usage
 ```js
-import { Canvas, Circle } from "canvas-kit";
+import { Eraser }  from 'canvas-kit'
 
-var canvas = new Canvas({
-  container: document.getElementById("container")
-});
-
-canvas.addElement(
-  new Circle({
-    x: 100,
-    y: 100,
-    r: 59
-  })
-);
-
-canvas.draw();
+new Eraser({
+  container: document.getElementById('aa'),
+  frontImg: require('../assets/eraser1.jpg'),
+  backImg: require('../assets/eraser2.jpg')
+})
 ```

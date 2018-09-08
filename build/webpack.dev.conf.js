@@ -22,7 +22,7 @@ var webpackConfig = {
       {
         test: /.js$/,
         loaders: ['babel-loader', 'eslint-loader'],
-        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../see')]
+        include: [path.resolve(__dirname, '../src')]
       },
       {
         test: /.s[c|a]ss$/,

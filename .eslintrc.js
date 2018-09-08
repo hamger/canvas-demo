@@ -14,6 +14,7 @@ module.exports = {
     'standard'
   ],
   rules: {
+    'no-unused-vars': 0,
     'generator-star-spacing': 'off',
     'no-new': 0,
     'no-useless-constructor': 0,

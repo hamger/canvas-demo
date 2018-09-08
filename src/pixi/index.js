@@ -1,46 +1,32 @@
 import * as PIXI from 'pixi.js'
 
-// var app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb })
-// document.body.appendChild(app.view)
+// Aliases
+let Application = PIXI.Application,
+  loader = PIXI.loader,
+  resources = PIXI.loader.resources,
+  Sprite = PIXI.Sprite
 
-// // create a new Sprite from an image path
-// var bunny = PIXI.Sprite.fromImage(require('../assets/car1.png'))
+// Create a Pixi Application
+let app = new Application({
+  width: 256,
+  height: 256,
+  antialias: true,
+  transparent: false,
+  resolution: 1
+})
+app.renderer.backgroundColor = 0x061639
+app.renderer.autoResize = true
+app.renderer.resize(512, 512)
 
-// // center the sprite's anchor point
-// bunny.anchor.set(0.5)
+loader
+  .add([require('../assets/car1.png'), require('../assets/car2.png')])
+  .load(setup)
 
-// // move the sprite to the center of the screen
-// bunny.x = app.screen.width / 2
-// bunny.y = app.screen.height / 2
-
-// app.stage.addChild(bunny)
-
-// // Listen for animate update
-// app.ticker.add(function (delta) {
-//   // just for fun, let's rotate mr rabbit a little
-//   // delta is 1 if running at 100% performance
-//   // creates frame-independent transformation
-//   bunny.rotation += 0.1 * delta
-// })
-
-var app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb })
-document.body.appendChild(app.view)
-
-var container = new PIXI.Container()
-
-app.stage.addChild(container)
-
-var texture = PIXI.Texture.fromImage(require('../assets/car1.png'))
-
-// Create a 5x5 grid of bunnies
-for (var i = 0; i < 25; i++) {
-  var bunny = new PIXI.Sprite(texture)
-  bunny.anchor.set(0.5)
-  bunny.x = (i % 5) * 40
-  bunny.y = Math.floor(i / 5) * 40
-  container.addChild(bunny)
+function setup () {
+  let sprite = new Sprite(resources[require('../assets/car1.png')].texture)
+  app.stage.addChild(sprite)
+  sprite.texture = PIXI.utils.TextureCache[require('../assets/car2.png')]
 }
 
-// Center on the screen
-container.x = (app.screen.width - container.width) / 2
-container.y = (app.screen.height - container.height) / 2
+// Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view)

@@ -10,8 +10,6 @@ import { Eraser }  from "canvas-kit";
 new Eraser(options);
 ```
 
-[使用案例](./index.js)
-
 ## Options
 
 `options`为一个对象，接受如下配置：

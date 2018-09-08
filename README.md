@@ -1,5 +1,5 @@
 # canvas-demo
-兴趣使然，那些关于 canvas 的故事
+兴趣使然，那些关于 canvas 的 demo
 
 ## Construction
 ```
@@ -19,7 +19,7 @@
 ## canvas-kit
 > 在编写 canvas demo 过程中，抽象出一些实用的方法，用于方便开发或者快速实现一些效果
 
-详见 [canvas-kit 文档](https://github.com/hamger/canvas-demo/tree/master/output)
+详见 [canvas-kit 文档](https://hamger.github.io/canvas-demo/#/)
 
 ## Start
 ### 安装依赖

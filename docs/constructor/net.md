@@ -10,8 +10,6 @@ import { Net } from "canvas-kit";
 new Net(options);
 ```
 
-[使用案例](./index.js)
-
 ## Options
 
 `options`为一个对象，接受如下配置：

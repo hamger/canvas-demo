@@ -23,9 +23,17 @@ loader
   .load(setup)
 
 function setup () {
-  let sprite = new Sprite(resources[require('../assets/car1.png')].texture)
-  app.stage.addChild(sprite)
-  sprite.texture = PIXI.utils.TextureCache[require('../assets/car2.png')]
+  let cat = new Sprite(resources[require('../assets/car1.png')].texture)
+  cat.x = 96
+  cat.y = 96
+  cat.interactive = true
+  cat.buttonMode = true
+
+  cat.on('mousedown', function () {
+    console.log(34)
+  })
+  app.stage.addChild(cat)
+  // cat.texture = PIXI.utils.TextureCache[require('../assets/car2.png')]
 }
 
 // Add the canvas that Pixi automatically created for you to the HTML document

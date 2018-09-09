@@ -54,7 +54,13 @@ var webpackConfig = {
   devServer: {
     clientLogLevel: 'warning',
     hot: true,
-    compress: true
+    compress: true,
+    stats: {
+      hash: false,
+      assets: false,
+      version: false,
+      modules: false
+    }
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 }

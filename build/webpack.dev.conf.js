@@ -59,7 +59,8 @@ var webpackConfig = {
       hash: false,
       assets: false,
       version: false,
-      modules: false
+      modules: false,
+      timings: false
     }
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
